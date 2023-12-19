@@ -7,8 +7,8 @@ var bookmarks = [];
 
 
 
-bookmarkRegex = /^\w{2,25}$/
-urlRegex= /^\w+\.[a-z]{2,4}$/;
+bookmarkRegex = /^[\w ]{2,}$/
+urlRegex= /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,})/gi//;
 
 if (localStorage.getItem("bookmarks") != null) {
     bookmarks = JSON.parse(localStorage.getItem("bookmarks"))   
@@ -32,7 +32,7 @@ function addBookmark(){
         closeForm();
         emptyForm();
     }else{
-        alert("Invalid input")
+        alert("Please only use letters and spaces for the name with a valid URL")
     }       
 }
 
@@ -46,7 +46,7 @@ function displayBookmarks() {
         <div class="bookmark">
         <button class="deletebtn" onclick="deleteBookmark(${i})"><i class="fa-solid fa-xmark ">
         </i></button>
-        <a target="_blank" href="http://${bookmarks[i].url}"><img src="https://www.google.com/s2/favicons?domain=http://${bookmarks[i].url}">  ${bookmarks[i].name}</a>
+        <a target="_blank" href="${bookmarks[i].url}"><img src="https://www.google.com/s2/favicons?domain=${bookmarks[i].url}">  ${bookmarks[i].name}</a>
     </div>`
     }
 
